@@ -1,0 +1,23 @@
+# Keep build context minimal and reproducible: local colcon output and Python
+# bytecode must never reach the image, where they would shadow the build done
+# inside the container.
+build/
+install/
+log/
+__pycache__/
+*.pyc
+.git/
+# A submodule's .git is a FILE, not a directory, so the pattern above misses
+# src/ros-balena-supervisor-msgs/.git.
+**/.git
+.gitmodules
+.gitignore
+.dockerignore
+CLAUDE.md
+README.md
+.claude/
+# Publishing tooling: it stages the build, it is never part of one.
+Makefile
+scripts/
+stage/
+smoke_test/

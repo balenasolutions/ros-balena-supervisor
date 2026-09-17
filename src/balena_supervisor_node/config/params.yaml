@@ -1,0 +1,38 @@
+# Parameters for the balena supervisor node.
+#
+# This file deliberately pins NOTHING. Every parameter already defaults from a
+# SUPERVISOR_NODE_* environment variable, which is the primary knob for a
+# balena block: device and fleet variables can be changed from the dashboard
+# without rebuilding the image.
+#
+# Precedence:  value pinned here  >  SUPERVISOR_NODE_* variable  >  default
+#
+# Pinning a parameter here means the matching environment variable is ignored.
+
+/**:
+  ros__parameters: {}
+
+# ---------------------------------------------------------------------------
+# Reference
+#
+# To pin parameters, replace the `{}` above with block entries:
+#
+#     /**:
+#       ros__parameters:
+#         poll_interval_sec: 5.0
+#         enable_power_control: true
+#
+# parameter              environment variable                     default
+# ---------------------  ---------------------------------------  ---------
+# poll_interval_sec      SUPERVISOR_NODE_POLL_INTERVAL_SEC        10.0
+# request_timeout_sec    SUPERVISOR_NODE_REQUEST_TIMEOUT_SEC      15.0
+# lock_path              SUPERVISOR_NODE_LOCK_PATH                /tmp/balena/updates.lock
+# enable_power_control   SUPERVISOR_NODE_ENABLE_POWER_CONTROL     false
+# enable_purge           SUPERVISOR_NODE_ENABLE_PURGE             false
+# enable_lock_control    SUPERVISOR_NODE_ENABLE_LOCK_CONTROL      true
+# force_operations       SUPERVISOR_NODE_FORCE_OPERATIONS         false
+#
+# Connection details (supervisor_address, supervisor_api_key, app_id) have no
+# environment override of their own: they default to the BALENA_* variables
+# injected by the io.balena.features.supervisor-api label, and only need
+# setting when testing against a remote device.

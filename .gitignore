@@ -1,0 +1,12 @@
+build/
+install/
+log/
+
+# Per-distro source trees written by scripts/stage.sh for `balena push`.
+stage/
+__pycache__/
+*.pyc
+CLAUDE.md
+
+# Local smoke-test scaffolding; not part of the block.
+smoke_test/

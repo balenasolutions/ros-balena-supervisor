@@ -1,0 +1,36 @@
+version: '2.1'
+
+services:
+  balena-supervisor-node:
+    # The ROS distro comes from the Dockerfile's ARG ROS_DISTRO, which
+    # scripts/stage.sh rewrites per published variant. Do NOT add a
+    # `build: args: ROS_DISTRO:` entry here -- it would override that silently,
+    # and the staged tree would build the wrong distro while looking correct.
+    build: .
+    restart: always
+    # Host networking keeps DDS discovery working with other ROS containers on
+    # the device and with robots on the LAN.
+    network_mode: host
+    # Deliberately NO `ipc: host`. The block restricts Fast DDS to UDP instead,
+    # which crosses container boundaries without exposing the host IPC
+    # namespace. See config/fastdds-udp-only.xml.
+    labels:
+      # Injects BALENA_SUPERVISOR_ADDRESS and BALENA_SUPERVISOR_API_KEY.
+      # Without this the node cannot reach the supervisor at all.
+      io.balena.features.supervisor-api: '1'
+    environment:
+      # --- ROS middleware (read natively by ROS 2) ---
+      ROS_DOMAIN_ID: '0'
+      # Must match the rest of your robot -- a mismatch means the nodes never
+      # see each other, silently. rmw_fastrtps_cpp, rmw_cyclonedds_cpp and
+      # rmw_zenoh_cpp are all installed; Zenoh additionally needs a router.
+      RMW_IMPLEMENTATION: rmw_fastrtps_cpp
+
+      # --- Node configuration ---
+      # Destructive services are not advertised unless enabled here. Any of
+      # these can also be set as a device or fleet variable in the balena
+      # dashboard, which is the point of using environment variables for them.
+      SUPERVISOR_NODE_ENABLE_POWER_CONTROL: 'false'
+      SUPERVISOR_NODE_ENABLE_PURGE: 'false'
+      SUPERVISOR_NODE_ENABLE_LOCK_CONTROL: 'true'
+      SUPERVISOR_NODE_POLL_INTERVAL_SEC: '10'

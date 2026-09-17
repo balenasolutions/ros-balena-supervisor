@@ -1,0 +1,724 @@
+==> staging block source from /Users/samd/Projects/ros-balena-supervisor (ROS 2 jazzy)
+==> staged:
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/config
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/config/fastdds-udp-only.xml
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/Dockerfile
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/smoke_test_node.py
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/Dockerfile.smoketest
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/entrypoint.sh
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/src
+
+==> pushing to 192.168.8.160 (local mode must be enabled on the device)
+    both containers build ROS 2 jazzy
+    Ctrl-C detaches from the log stream; the containers keep running.
+
+[Info]    Starting build on device 192.168.8.160
+[Build]   [balena-supervisor-node] Step 1/15 : ARG ROS_DISTRO=jazzy
+[Build]   [balena-supervisor-node] Step 2/15 : FROM ros:${ROS_DISTRO}-ros-base
+[Build]   [smoke-test] Step 1/12 : ARG ROS_DISTRO=jazzy
+[Build]   [smoke-test] Step 2/12 : FROM ros:${ROS_DISTRO}-ros-base
+[Build]   [balena-supervisor-node]  ---> 2ff2feced2a6
+[Build]   [balena-supervisor-node] Step 3/15 : SHELL ["/bin/bash", "-lc"]
+[Build]   [balena-supervisor-node]  ---> Using cache
+[Build]   [balena-supervisor-node]  ---> ebcc7d4cc9e5
+[Build]   [balena-supervisor-node] Step 4/15 : RUN apt-get update  && apt-get install -y --no-install-recommends       ros-${ROS_DISTRO}-diagnostic-msgs       ros-${ROS_DISTRO}-rmw-fastrtps-cpp       ros-${ROS_DISTRO}-rmw-cyclonedds-cpp       ros-${ROS_DISTRO}-rmw-zenoh-cpp  && rm -rf /var/lib/apt/lists/*
+[Build]   [balena-supervisor-node]  ---> Using cache
+[Build]   [balena-supervisor-node]  ---> a5e86470afb6
+[Build]   [balena-supervisor-node] Step 5/15 : WORKDIR /ros2_ws
+[Build]   [balena-supervisor-node]  ---> Using cache
+[Build]   [balena-supervisor-node]  ---> c8fbcc14ea7b
+[Build]   [balena-supervisor-node] Step 6/15 : COPY src/ src/
+[Build]   [smoke-test]  ---> 2ff2feced2a6
+[Build]   [smoke-test] Step 3/12 : SHELL ["/bin/bash", "-lc"]
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> ebcc7d4cc9e5
+[Build]   [smoke-test] Step 4/12 : RUN apt-get update  && apt-get install -y --no-install-recommends       ros-${ROS_DISTRO}-diagnostic-msgs       ros-${ROS_DISTRO}-rmw-fastrtps-cpp       ros-${ROS_DISTRO}-rmw-cyclonedds-cpp       ros-${ROS_DISTRO}-rmw-zenoh-cpp  && rm -rf /var/lib/apt/lists/*
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> a5e86470afb6
+[Build]   [smoke-test] Step 5/12 : WORKDIR /ros2_ws
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> c8fbcc14ea7b
+[Build]   [smoke-test] Step 6/12 : COPY src/balena_supervisor_msgs src/balena_supervisor_msgs
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 5d5f3253123d
+[Build]   [smoke-test] Step 7/12 : RUN source /opt/ros/${ROS_DISTRO}/setup.bash  && colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release  && rm -rf build log
+[Build]   [balena-supervisor-node]  ---> Using cache
+[Build]   [balena-supervisor-node]  ---> bbdd629a8f5a
+[Build]   [balena-supervisor-node] Step 7/15 : RUN source /opt/ros/${ROS_DISTRO}/setup.bash  && colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release  && rm -rf build log
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> d6cbffdb93e2
+[Build]   [smoke-test] Step 8/12 : COPY smoke_test_node.py /smoke_test_node.py
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> b8cbc6187505
+[Build]   [smoke-test] Step 9/12 : ENV PYTHONUNBUFFERED=1
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 8b7c65e50bf2
+[Build]   [smoke-test] Step 10/12 : CMD ["bash", "-lc", "source /ros2_ws/install/setup.bash && exec python3 /smoke_test_node.py"]
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> b70513e570fb
+[Build]   [smoke-test] Step 11/12 : LABEL io.resin.local.image=1
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 341d278f799e
+[Build]   [smoke-test] Step 12/12 : LABEL io.resin.local.service=smoke-test
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> a60d90227f5b
+[Build]   [smoke-test] Successfully built a60d90227f5b
+[Build]   [smoke-test] Successfully tagged local_image_smoke-test:latest
+[Build]   [balena-supervisor-node]  ---> Running in 2586b67aeee2
+[Build]   [balena-supervisor-node] Starting >>> balena_supervisor_msgs
+[Build]   [balena-supervisor-node] [Processing: balena_supervisor_msgs]
+[Build]   Finished <<< balena_supervisor_msgs [43.5s]
+[Build]   [balena-supervisor-node] Starting >>> balena_supervisor_node
+[Build]   [balena-supervisor-node] Finished <<< balena_supervisor_node [1.25s]
+[Build]   [balena-supervisor-node] 
+[Build]   Summary: 2 packages finished [44.9s]
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 2586b67aeee2
+[Build]   [balena-supervisor-node]  ---> 0d8e296b936b
+[Build]   [balena-supervisor-node] Step 8/15 : COPY config/ /etc/ros-balena-supervisor/
+[Build]   [balena-supervisor-node]  ---> f84d11427850
+[Build]   [balena-supervisor-node] Step 9/15 : COPY entrypoint.sh /entrypoint.sh
+[Build]   [balena-supervisor-node]  ---> 245e5182c098
+[Build]   [balena-supervisor-node] Step 10/15 : RUN chmod +x /entrypoint.sh
+[Build]   [balena-supervisor-node]  ---> Running in 07e057f0a5b7
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 07e057f0a5b7
+[Build]   [balena-supervisor-node]  ---> 505df2865274
+[Build]   [balena-supervisor-node] Step 11/15 : ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+[Build]   [balena-supervisor-node]  ---> Running in cfef30074bb9
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container cfef30074bb9
+[Build]   [balena-supervisor-node]  ---> da59fe514e4c
+[Build]   [balena-supervisor-node] Step 12/15 : ENTRYPOINT ["/entrypoint.sh"]
+[Build]   [balena-supervisor-node]  ---> Running in 8cee1ebf4c90
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 8cee1ebf4c90
+[Build]   [balena-supervisor-node]  ---> f3fa9558378b
+[Build]   [balena-supervisor-node] Step 13/15 : CMD ["balena_supervisor_node"]
+[Build]   [balena-supervisor-node]  ---> Running in e72c67205e1c
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container e72c67205e1c
+[Build]   [balena-supervisor-node]  ---> 7c08a11fdf78
+[Build]   [balena-supervisor-node] Step 14/15 : LABEL io.resin.local.image=1
+[Build]   [balena-supervisor-node]  ---> Running in 81b2bc5b1f2d
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 81b2bc5b1f2d
+[Build]   [balena-supervisor-node]  ---> b4795599dc55
+[Build]   [balena-supervisor-node] Step 15/15 : LABEL io.resin.local.service=balena-supervisor-node
+[Build]   [balena-supervisor-node]  ---> Running in 2f096cc6b311
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 2f096cc6b311
+[Build]   [balena-supervisor-node]  ---> 0f0b30a0394d
+[Build]   [balena-supervisor-node] Successfully built 0f0b30a0394d
+[Build]   [balena-supervisor-node] Successfully tagged local_image_balena-supervisor-node:latest
+
+[Info]    Streaming device logs...
+[Logs]    [2026-09-16T16:11:58.040Z] Streaming logs
+[Logs]    [2026-09-16T16:11:58.143Z] Taking update locks
+[Logs]    [2026-09-16T16:11:58.444Z] Killing service 'balena-supervisor-node sha256:d4f948c33a7169489aae1951b22c762f2c89502b0d3a91ca1cf767ba3c2b92ea'
+[Logs]    [2026-09-16T16:11:58.449Z] Killing service 'smoke-test sha256:9e34775975f28abacfe709d8c596197759a4509bfadfbc8665a10a074bae6da7'
+[Logs]    [2026-09-16T16:11:58.970Z] Service exited 'balena-supervisor-node sha256:d4f948c33a7169489aae1951b22c762f2c89502b0d3a91ca1cf767ba3c2b92ea'
+[Logs]    [2026-09-16T16:11:58.983Z] Killed service 'balena-supervisor-node sha256:d4f948c33a7169489aae1951b22c762f2c89502b0d3a91ca1cf767ba3c2b92ea'
+[Logs]    [2026-09-16T16:11:59.817Z] Installing service 'balena-supervisor-node sha256:0f0b30a0394dcf26a7db751546d01b2c413832c0205c55600f374467df0d8ef9'
+[Logs]    [2026-09-16T16:11:59.993Z] Installed service 'balena-supervisor-node sha256:0f0b30a0394dcf26a7db751546d01b2c413832c0205c55600f374467df0d8ef9'
+[Logs]    [2026-09-16T16:11:59.994Z] Starting service 'balena-supervisor-node sha256:0f0b30a0394dcf26a7db751546d01b2c413832c0205c55600f374467df0d8ef9'
+[Logs]    [2026-09-16T16:12:00.294Z] Started service 'balena-supervisor-node sha256:0f0b30a0394dcf26a7db751546d01b2c413832c0205c55600f374467df0d8ef9'
+[Logs]    [2026-09-16T16:12:00.710Z] [balena-supervisor-node] INFO: Fast DDS restricted to UDP (shared memory disabled) so this
+[Logs]    [2026-09-16T16:12:00.710Z] [balena-supervisor-node]       block reaches other containers without ipc: host, via
+[Logs]    [2026-09-16T16:12:00.710Z] [balena-supervisor-node]       FASTRTPS_DEFAULT_PROFILES_FILE. Set SUPERVISOR_NODE_FASTDDS_SHM=true to use
+[Logs]    [2026-09-16T16:12:00.710Z] [balena-supervisor-node]       shared memory instead, which then requires a shared IPC
+[Logs]    [2026-09-16T16:12:00.710Z] [balena-supervisor-node]       namespace.
+[Logs]    [2026-09-16T16:12:00.710Z] [balena-supervisor-node] INFO: using rmw_fastrtps_cpp on ROS_DOMAIN_ID=0
+[Logs]    [2026-09-16T16:12:01.397Z] [balena-supervisor-node] [0m[INFO] [1789575121.397745844] [balena_supervisor]: balena supervisor node ready (supervisor at http://127.0.0.1:48484, polling every 5.0s)[0m
+[Logs]    [2026-09-16T16:12:08.899Z] Service exited 'smoke-test sha256:9e34775975f28abacfe709d8c596197759a4509bfadfbc8665a10a074bae6da7'
+[Logs]    [2026-09-16T16:12:08.917Z] Killed service 'smoke-test sha256:9e34775975f28abacfe709d8c596197759a4509bfadfbc8665a10a074bae6da7'
+[Logs]    [2026-09-16T16:12:10.044Z] Installing service 'smoke-test sha256:a60d90227f5bcef8c425298f8586c15ccec3eca3a9579bbf496a8fef6176b85d'
+[Logs]    [2026-09-16T16:12:10.188Z] Installed service 'smoke-test sha256:a60d90227f5bcef8c425298f8586c15ccec3eca3a9579bbf496a8fef6176b85d'
+[Logs]    [2026-09-16T16:12:10.189Z] Starting service 'smoke-test sha256:a60d90227f5bcef8c425298f8586c15ccec3eca3a9579bbf496a8fef6176b85d'
+[Logs]    [2026-09-16T16:12:10.492Z] Started service 'smoke-test sha256:a60d90227f5bcef8c425298f8586c15ccec3eca3a9579bbf496a8fef6176b85d'
+[Logs]    [2026-09-16T16:12:11.573Z] Releasing update locks
+[Logs]    [2026-09-16T16:12:11.526Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:12:11.526Z] [smoke-test] BALENA SUPERVISOR BLOCK -- SMOKE TEST
+[Logs]    [2026-09-16T16:12:11.526Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:12:11.526Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:11.527Z] [smoke-test] --- environment -------------------------------------------------------
+[Logs]    [2026-09-16T16:12:11.527Z] [smoke-test]   ROS_DISTRO           jazzy
+[Logs]    [2026-09-16T16:12:11.527Z] [smoke-test]   RMW_IMPLEMENTATION   rmw_fastrtps_cpp
+[Logs]    [2026-09-16T16:12:11.527Z] [smoke-test]   ROS_DOMAIN_ID        0
+[Logs]    [2026-09-16T16:12:11.527Z] [smoke-test]   rmw (effective)      rmw_fastrtps_cpp
+[Logs]    [2026-09-16T16:12:11.527Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:11.527Z] [smoke-test] --- topic discovery ---------------------------------------------------
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test] [ PASS ] received DeviceState on /balena_supervisor/device_state
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test]   DeviceState:
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test]     uuid                 'ca9e9e1017a4521b70318ca8413a8790'
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test]     device_name          'mean-brook'
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test]     device_type          'raspberrypi5'
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test]     arch                 'aarch64'
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test]     os_version           'balenaOS 2026.7.0'
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test]     supervisor_version   '17.8.2'
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test]     status               'Idle'
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test]     commit               ''
+[Logs]    [2026-09-16T16:12:11.533Z] [smoke-test]     ip_addresses         ['192.168.8.160']
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test]     mac_addresses        ['88:A2:9E:F1:97:30', '2A:6A:AA:EC:75:35']
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test]     download_progress    -1
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test]     update flags         pending=True downloaded=False failed=False
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test]     vpn                  enabled=True connected=True
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test]     lock_held            False
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] [ PASS ] device uuid populated
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] [ PASS ] supervisor version populated
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] [ PASS ] arch populated (expect aarch64 on a Pi 5)  -- got 'aarch64'
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] [ PASS ] download_progress is -1 or 0-100  -- got -1
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] [ PASS ] received AppState on /balena_supervisor/app_state
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test]   AppState: app_id=1 state='applying' release='10ca12e1ea5e' overall_progress=-1
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test]     service 'balena-supervisor-node' status='Running'    image='Downloaded'   progress=-1
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test]     service 'smoke-test'             status='Running'    image='Downloaded'   progress=-1
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] [ PASS ] AppState lists services  -- found ['balena-supervisor-node', 'smoke-test']
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] [ PASS ] AppState includes this test container  -- services seen: ['balena-supervisor-node', 'smoke-test']
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:11.534Z] [smoke-test] --- diagnostics -------------------------------------------------------
+[Logs]    [2026-09-16T16:12:16.469Z] [smoke-test] [ PASS ] received DiagnosticArray on /diagnostics
+[Logs]    [2026-09-16T16:12:16.469Z] [smoke-test]   [OK   ] balena: supervisor                 Reachable
+[Logs]    [2026-09-16T16:12:16.469Z] [smoke-test]   [OK   ] balena: update                     Up to date
+[Logs]    [2026-09-16T16:12:16.469Z] [smoke-test]   [OK   ] balena: update lock                Not held
+[Logs]    [2026-09-16T16:12:16.469Z] [smoke-test]   [OK   ] balena: service balena-supervisor-node Running
+[Logs]    [2026-09-16T16:12:16.469Z] [smoke-test]   [OK   ] balena: service smoke-test         Running
+[Logs]    [2026-09-16T16:12:16.469Z] [smoke-test] [ PASS ] diagnostics include 'balena: supervisor'
+[Logs]    [2026-09-16T16:12:16.469Z] [smoke-test] [ PASS ] diagnostics include 'balena: update'
+[Logs]    [2026-09-16T16:12:16.470Z] [smoke-test] [ PASS ] diagnostics include 'balena: update lock'
+[Logs]    [2026-09-16T16:12:16.470Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:16.470Z] [smoke-test] --- service advertisement and safety gates ----------------------------
+[Logs]    [2026-09-16T16:12:21.472Z] [smoke-test] [ PASS ] service advertised: start_service
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: stop_service
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: restart_service
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: restart_app
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: check_update
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: blink
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: get_tags
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: set_tags
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: get_host_config
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: set_host_config
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: take_update_lock
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] service advertised: release_update_lock
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] destructive service NOT advertised: reboot
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] destructive service NOT advertised: shutdown
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] [ PASS ] destructive service NOT advertised: purge_data
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:21.473Z] [smoke-test] --- supervisor payloads (open verification items) ---------------------
+[Logs]    [2026-09-16T16:12:21.696Z] [smoke-test] [ PASS ] get_tags call succeeded  -- Read 1 tag(s)
+[Logs]    [2026-09-16T16:12:21.696Z] [smoke-test]     parsed tags: [('sams_tag', 'abc123')]
+[Logs]    [2026-09-16T16:12:21.696Z] [smoke-test] [ PASS ] expected tag 'sams_tag' was parsed
+[Logs]    [2026-09-16T16:12:21.696Z] [smoke-test] [ PASS ] tag 'sams_tag' has expected value  -- got 'abc123', wanted 'abc123'
+[Logs]    [2026-09-16T16:12:21.781Z] [smoke-test] [ PASS ] get_host_config  -- Read host configuration
+[Logs]    [2026-09-16T16:12:21.782Z] [smoke-test]     hostname   : 'ca9e9e1'
+[Logs]    [2026-09-16T16:12:21.782Z] [smoke-test]     proxy_json : ''
+[Logs]    [2026-09-16T16:12:21.782Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:21.782Z] [smoke-test] --- update lock (the critical path) -----------------------------------
+[Logs]    [2026-09-16T16:12:21.786Z] [balena-supervisor-node] [0m[INFO] [1789575141.785814054] [balena_supervisor]: Update lock taken; application and host OS updates blocked.[0m
+[Logs]    [2026-09-16T16:12:21.787Z] [smoke-test] [ PASS ] take_update_lock  -- ACQUIRED -- Update lock taken; application and host OS updates blocked.
+[Logs]    [2026-09-16T16:12:21.787Z] [smoke-test] [ PASS ] lock_held became true on the state topic
+[Logs]    [2026-09-16T16:12:21.790Z] [balena-supervisor-node] [0m[INFO] [1789575141.790327369] [balena_supervisor]: Update lock already held by this node.[0m
+[Logs]    [2026-09-16T16:12:21.793Z] [smoke-test] [ PASS ] second take reports ALREADY_HELD_BY_US  -- got ALREADY_HELD_BY_US
+[Logs]    [2026-09-16T16:12:21.875Z] [balena-supervisor-node] [0m[INFO] [1789575141.875326276] [balena_supervisor]: Update lock released.[0m
+[Logs]    [2026-09-16T16:12:21.878Z] [smoke-test] [ PASS ] release_update_lock  -- Update lock released.
+[Logs]    [2026-09-16T16:12:21.878Z] [smoke-test] [ PASS ] lock_held returned to false
+[Logs]    [2026-09-16T16:12:21.878Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:21.878Z] [smoke-test]   NOTE: this proves the lock is taken and released, NOT that
+[Logs]    [2026-09-16T16:12:21.878Z] [smoke-test]   the host OS honours it. Confirming that an flock held
+[Logs]    [2026-09-16T16:12:21.878Z] [smoke-test]   inside a container blocks a host OS update still needs a
+[Logs]    [2026-09-16T16:12:21.878Z] [smoke-test]   real hostOS update attempt -- open item 1 in CLAUDE.md.
+[Logs]    [2026-09-16T16:12:21.878Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:21.878Z] [smoke-test] --- blink (physical confirmation) -------------------------------------
+[Logs]    [2026-09-16T16:12:21.884Z] [smoke-test] [ PASS ] blink  -- OK
+[Logs]    [2026-09-16T16:12:21.884Z] [smoke-test]   -> the device LED should blink for ~15s now
+[Logs]    [2026-09-16T16:12:21.884Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:21.884Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:12:21.885Z] [smoke-test] SUMMARY: 37 passed, 0 failed, 37 checks total
+[Logs]    [2026-09-16T16:12:21.885Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:12:21.885Z] [smoke-test] END OF SMOKE TEST -- paste everything from the first "=" line.
+[Logs]    [2026-09-16T16:12:21.893Z] [smoke-test] 
+[Logs]    [2026-09-16T16:12:21.894Z] [smoke-test] (test finished -- idling so the logs stay readable; `balena device ssh <ip> smoke-test` to poke around)
+==> staging block source from /Users/samd/Projects/ros-balena-supervisor (ROS 2 humble)
+==> staged:
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/config
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/config/fastdds-udp-only.xml
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/Dockerfile
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/smoke_test_node.py
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/Dockerfile.smoketest
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/entrypoint.sh
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/src
+
+==> pushing to 192.168.8.160 (local mode must be enabled on the device)
+    both containers build ROS 2 humble
+    Ctrl-C detaches from the log stream; the containers keep running.
+
+[Info]    Starting build on device 192.168.8.160
+[Build]   [balena-supervisor-node] Step 1/15 : ARG ROS_DISTRO=humble
+[Build]   [balena-supervisor-node] Step 2/15 : FROM ros:${ROS_DISTRO}-ros-base
+[Build]   [balena-supervisor-node]  ---> a0faddd2534a
+[Build]   [balena-supervisor-node] Step 3/15 : SHELL ["/bin/bash", "-lc"]
+[Build]   [smoke-test] Step 1/12 : ARG ROS_DISTRO=humble
+[Build]   [smoke-test] Step 2/12 : FROM ros:${ROS_DISTRO}-ros-base
+[Build]   [balena-supervisor-node]  ---> Using cache
+[Build]   [balena-supervisor-node]  ---> 1c8ddcd1d069
+[Build]   [balena-supervisor-node] Step 4/15 : RUN apt-get update  && apt-get install -y --no-install-recommends       ros-${ROS_DISTRO}-diagnostic-msgs       ros-${ROS_DISTRO}-rmw-fastrtps-cpp       ros-${ROS_DISTRO}-rmw-cyclonedds-cpp       ros-${ROS_DISTRO}-rmw-zenoh-cpp  && rm -rf /var/lib/apt/lists/*
+[Build]   [balena-supervisor-node]  ---> Using cache
+[Build]   [balena-supervisor-node]  ---> 4da0d948607b
+[Build]   [balena-supervisor-node] Step 5/15 : WORKDIR /ros2_ws
+[Build]   [smoke-test]  ---> a0faddd2534a
+[Build]   [smoke-test] Step 3/12 : SHELL ["/bin/bash", "-lc"]
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 1c8ddcd1d069
+[Build]   [smoke-test] Step 4/12 : RUN apt-get update  && apt-get install -y --no-install-recommends       ros-${ROS_DISTRO}-diagnostic-msgs       ros-${ROS_DISTRO}-rmw-fastrtps-cpp       ros-${ROS_DISTRO}-rmw-cyclonedds-cpp       ros-${ROS_DISTRO}-rmw-zenoh-cpp  && rm -rf /var/lib/apt/lists/*
+[Build]   [balena-supervisor-node]  ---> Using cache
+[Build]   [balena-supervisor-node]  ---> 484aff603947
+[Build]   [balena-supervisor-node] Step 6/15 : COPY src/ src/
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 4da0d948607b
+[Build]   [smoke-test] Step 5/12 : WORKDIR /ros2_ws
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 484aff603947
+[Build]   [smoke-test] Step 6/12 : COPY src/balena_supervisor_msgs src/balena_supervisor_msgs
+[Build]   [smoke-test]  ---> 334e37d64cf1
+[Build]   [smoke-test] Step 7/12 : RUN source /opt/ros/${ROS_DISTRO}/setup.bash  && colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release  && rm -rf build log
+[Build]   [balena-supervisor-node]  ---> 056e59c67f94
+[Build]   [balena-supervisor-node] Step 7/15 : RUN source /opt/ros/${ROS_DISTRO}/setup.bash  && colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release  && rm -rf build log
+[Build]   [balena-supervisor-node]  ---> Running in 6b12e8927ece
+[Build]   [smoke-test]  ---> Running in e68da65caa08
+[Build]   [smoke-test] Starting >>> balena_supervisor_msgs
+[Build]   [balena-supervisor-node] Starting >>> balena_supervisor_msgs
+[Build]   [balena-supervisor-node] [Processing: balena_supervisor_msgs]
+[Build]   Finished <<< balena_supervisor_msgs [49.3s]
+[Build]   [balena-supervisor-node] Starting >>> balena_supervisor_node
+[Build]   [smoke-test] [Processing: balena_supervisor_msgs]
+[Build]   Finished <<< balena_supervisor_msgs [50.6s]
+[Build]   [smoke-test] 
+[Build]   Summary: 1 package finished [50.8s]
+[Build]   [balena-supervisor-node] Finished <<< balena_supervisor_node [1.36s]
+[Build]   [balena-supervisor-node] 
+[Build]   Summary: 2 packages finished [50.9s]
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 6b12e8927ece
+[Build]   [balena-supervisor-node]  ---> 0fde38ec6382
+[Build]   [balena-supervisor-node] Step 8/15 : COPY config/ /etc/ros-balena-supervisor/
+[Build]   [smoke-test]  ---> Removed intermediate container e68da65caa08
+[Build]   [smoke-test]  ---> 1066d650d6f0
+[Build]   [smoke-test] Step 8/12 : COPY smoke_test_node.py /smoke_test_node.py
+[Build]   [balena-supervisor-node]  ---> 928be7fe5a23
+[Build]   [balena-supervisor-node] Step 9/15 : COPY entrypoint.sh /entrypoint.sh
+[Build]   [smoke-test]  ---> 6ed07daccdcc
+[Build]   [smoke-test] Step 9/12 : ENV PYTHONUNBUFFERED=1
+[Build]   [smoke-test]  ---> Running in fd045c83c246
+[Build]   [balena-supervisor-node]  ---> d6b6e828ff8a
+[Build]   [balena-supervisor-node] Step 10/15 : RUN chmod +x /entrypoint.sh
+[Build]   [balena-supervisor-node]  ---> Running in bfbffc8e4c6f
+[Build]   [smoke-test]  ---> Removed intermediate container fd045c83c246
+[Build]   [smoke-test]  ---> ceaf8067f912
+[Build]   [smoke-test] Step 10/12 : CMD ["bash", "-lc", "source /ros2_ws/install/setup.bash && exec python3 /smoke_test_node.py"]
+[Build]   [smoke-test]  ---> Running in 1fa1276721ae
+[Build]   [smoke-test]  ---> Removed intermediate container 1fa1276721ae
+[Build]   [smoke-test]  ---> 56e52509e26b
+[Build]   [smoke-test] Step 11/12 : LABEL io.resin.local.image=1
+[Build]   [smoke-test]  ---> Running in 4ce7b015df5a
+[Build]   [smoke-test]  ---> Removed intermediate container 4ce7b015df5a
+[Build]   [smoke-test]  ---> 7bc9d4f95e8c
+[Build]   [smoke-test] Step 12/12 : LABEL io.resin.local.service=smoke-test
+[Build]   [smoke-test]  ---> Running in 61672cc364bb
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container bfbffc8e4c6f
+[Build]   [balena-supervisor-node]  ---> 92a51f4b8163
+[Build]   [balena-supervisor-node] Step 11/15 : ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+[Build]   [balena-supervisor-node]  ---> Running in 2a57b2f3d045
+[Build]   [smoke-test]  ---> Removed intermediate container 61672cc364bb
+[Build]   [smoke-test]  ---> ecca5760e634
+[Build]   [smoke-test] Successfully built ecca5760e634
+[Build]   [smoke-test] Successfully tagged local_image_smoke-test:latest
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 2a57b2f3d045
+[Build]   [balena-supervisor-node]  ---> dbfc77041997
+[Build]   [balena-supervisor-node] Step 12/15 : ENTRYPOINT ["/entrypoint.sh"]
+[Build]   [balena-supervisor-node]  ---> Running in fef93f3e0245
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container fef93f3e0245
+[Build]   [balena-supervisor-node]  ---> 703310ecf155
+[Build]   [balena-supervisor-node] Step 13/15 : CMD ["balena_supervisor_node"]
+[Build]   [balena-supervisor-node]  ---> Running in 6b7f53abe7ed
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 6b7f53abe7ed
+[Build]   [balena-supervisor-node]  ---> ca69ff49973c
+[Build]   [balena-supervisor-node] Step 14/15 : LABEL io.resin.local.image=1
+[Build]   [balena-supervisor-node]  ---> Running in d44b533e6b31
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container d44b533e6b31
+[Build]   [balena-supervisor-node]  ---> fbba0be27f26
+[Build]   [balena-supervisor-node] Step 15/15 : LABEL io.resin.local.service=balena-supervisor-node
+[Build]   [balena-supervisor-node]  ---> Running in 8471d8018a1c
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 8471d8018a1c
+[Build]   [balena-supervisor-node]  ---> 737ac881911d
+[Build]   [balena-supervisor-node] Successfully built 737ac881911d
+[Build]   [balena-supervisor-node] Successfully tagged local_image_balena-supervisor-node:latest
+
+[Info]    Streaming device logs...
+[Logs]    [2026-09-16T16:13:52.321Z] Streaming logs
+[Logs]    [2026-09-16T16:13:52.427Z] Taking update locks
+[Logs]    [2026-09-16T16:13:52.727Z] Killing service 'balena-supervisor-node sha256:0f0b30a0394dcf26a7db751546d01b2c413832c0205c55600f374467df0d8ef9'
+[Logs]    [2026-09-16T16:13:52.727Z] Killing service 'smoke-test sha256:a60d90227f5bcef8c425298f8586c15ccec3eca3a9579bbf496a8fef6176b85d'
+[Logs]    [2026-09-16T16:13:53.208Z] Service exited 'balena-supervisor-node sha256:0f0b30a0394dcf26a7db751546d01b2c413832c0205c55600f374467df0d8ef9'
+[Logs]    [2026-09-16T16:13:53.215Z] Killed service 'balena-supervisor-node sha256:0f0b30a0394dcf26a7db751546d01b2c413832c0205c55600f374467df0d8ef9'
+[Logs]    [2026-09-16T16:13:54.111Z] Installing service 'balena-supervisor-node sha256:737ac881911d5c45e5f6e114ad0d2e7c5ec97a30a2d7cbd9fd6c47c71127f9df'
+[Logs]    [2026-09-16T16:13:54.577Z] Installed service 'balena-supervisor-node sha256:737ac881911d5c45e5f6e114ad0d2e7c5ec97a30a2d7cbd9fd6c47c71127f9df'
+[Logs]    [2026-09-16T16:13:54.580Z] Starting service 'balena-supervisor-node sha256:737ac881911d5c45e5f6e114ad0d2e7c5ec97a30a2d7cbd9fd6c47c71127f9df'
+[Logs]    [2026-09-16T16:13:54.891Z] Started service 'balena-supervisor-node sha256:737ac881911d5c45e5f6e114ad0d2e7c5ec97a30a2d7cbd9fd6c47c71127f9df'
+[Logs]    [2026-09-16T16:13:55.213Z] [balena-supervisor-node] INFO: Fast DDS restricted to UDP (shared memory disabled) so this
+[Logs]    [2026-09-16T16:13:55.214Z] [balena-supervisor-node]       block reaches other containers without ipc: host, via
+[Logs]    [2026-09-16T16:13:55.214Z] [balena-supervisor-node]       FASTRTPS_DEFAULT_PROFILES_FILE. Set SUPERVISOR_NODE_FASTDDS_SHM=true to use
+[Logs]    [2026-09-16T16:13:55.214Z] [balena-supervisor-node]       shared memory instead, which then requires a shared IPC
+[Logs]    [2026-09-16T16:13:55.214Z] [balena-supervisor-node]       namespace.
+[Logs]    [2026-09-16T16:13:55.214Z] [balena-supervisor-node] INFO: using rmw_fastrtps_cpp on ROS_DOMAIN_ID=0
+[Logs]    [2026-09-16T16:13:55.712Z] [balena-supervisor-node] [0m[INFO] [1789575235.712158739] [balena_supervisor]: balena supervisor node ready (supervisor at http://127.0.0.1:48484, polling every 5.0s)[0m
+[Logs]    [2026-09-16T16:14:03.138Z] Service exited 'smoke-test sha256:a60d90227f5bcef8c425298f8586c15ccec3eca3a9579bbf496a8fef6176b85d'
+[Logs]    [2026-09-16T16:14:03.148Z] Killed service 'smoke-test sha256:a60d90227f5bcef8c425298f8586c15ccec3eca3a9579bbf496a8fef6176b85d'
+[Logs]    [2026-09-16T16:14:03.590Z] Installing service 'smoke-test sha256:ecca5760e6346442eed8a9f26d701e64fec6632f71e7b7fd8557440d276689f3'
+[Logs]    [2026-09-16T16:14:03.743Z] Installed service 'smoke-test sha256:ecca5760e6346442eed8a9f26d701e64fec6632f71e7b7fd8557440d276689f3'
+[Logs]    [2026-09-16T16:14:03.743Z] Starting service 'smoke-test sha256:ecca5760e6346442eed8a9f26d701e64fec6632f71e7b7fd8557440d276689f3'
+[Logs]    [2026-09-16T16:14:04.051Z] Started service 'smoke-test sha256:ecca5760e6346442eed8a9f26d701e64fec6632f71e7b7fd8557440d276689f3'
+[Logs]    [2026-09-16T16:14:04.802Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:14:04.803Z] [smoke-test] BALENA SUPERVISOR BLOCK -- SMOKE TEST
+[Logs]    [2026-09-16T16:14:04.803Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:14:04.803Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:04.803Z] [smoke-test] --- environment -------------------------------------------------------
+[Logs]    [2026-09-16T16:14:04.803Z] [smoke-test]   ROS_DISTRO           humble
+[Logs]    [2026-09-16T16:14:04.803Z] [smoke-test]   RMW_IMPLEMENTATION   rmw_fastrtps_cpp
+[Logs]    [2026-09-16T16:14:04.803Z] [smoke-test]   ROS_DOMAIN_ID        0
+[Logs]    [2026-09-16T16:14:04.803Z] [smoke-test]   rmw (effective)      rmw_fastrtps_cpp
+[Logs]    [2026-09-16T16:14:04.803Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:04.803Z] [smoke-test] --- topic discovery ---------------------------------------------------
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test] [ PASS ] received DeviceState on /balena_supervisor/device_state
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test]   DeviceState:
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test]     uuid                 'ca9e9e1017a4521b70318ca8413a8790'
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test]     device_name          'mean-brook'
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test]     device_type          'raspberrypi5'
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test]     arch                 'aarch64'
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test]     os_version           'balenaOS 2026.7.0'
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test]     supervisor_version   '17.8.2'
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test]     status               'Idle'
+[Logs]    [2026-09-16T16:14:04.811Z] [smoke-test]     commit               ''
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test]     ip_addresses         ['192.168.8.160']
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test]     mac_addresses        ['88:A2:9E:F1:97:30', '2A:6A:AA:EC:75:35']
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test]     download_progress    -1
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test]     update flags         pending=True downloaded=False failed=False
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test]     vpn                  enabled=True connected=True
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test]     lock_held            False
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test] [ PASS ] device uuid populated
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test] [ PASS ] supervisor version populated
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test] [ PASS ] arch populated (expect aarch64 on a Pi 5)  -- got 'aarch64'
+[Logs]    [2026-09-16T16:14:04.812Z] [smoke-test] [ PASS ] download_progress is -1 or 0-100  -- got -1
+[Logs]    [2026-09-16T16:14:04.813Z] [smoke-test] [ PASS ] received AppState on /balena_supervisor/app_state
+[Logs]    [2026-09-16T16:14:04.813Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:04.813Z] [smoke-test]   AppState: app_id=1 state='applying' release='10ca12e1ea5e' overall_progress=-1
+[Logs]    [2026-09-16T16:14:04.813Z] [smoke-test]     service 'balena-supervisor-node' status='Running'    image='Downloaded'   progress=-1
+[Logs]    [2026-09-16T16:14:04.813Z] [smoke-test]     service 'smoke-test'             status='Stopping'   image='Downloaded'   progress=-1
+[Logs]    [2026-09-16T16:14:04.813Z] [smoke-test] [ PASS ] AppState lists services  -- found ['balena-supervisor-node', 'smoke-test']
+[Logs]    [2026-09-16T16:14:04.813Z] [smoke-test] [ PASS ] AppState includes this test container  -- services seen: ['balena-supervisor-node', 'smoke-test']
+[Logs]    [2026-09-16T16:14:04.814Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:04.814Z] [smoke-test] --- diagnostics -------------------------------------------------------
+[Logs]    [2026-09-16T16:14:05.131Z] Releasing update locks
+[Logs]    [2026-09-16T16:14:05.794Z] [smoke-test] [ PASS ] received DiagnosticArray on /diagnostics
+[Logs]    [2026-09-16T16:14:05.795Z] [smoke-test]   [OK   ] balena: supervisor                 Reachable
+[Logs]    [2026-09-16T16:14:05.795Z] [smoke-test]   [OK   ] balena: update                     Update pending
+[Logs]    [2026-09-16T16:14:05.795Z] [smoke-test]   [OK   ] balena: update lock                Not held
+[Logs]    [2026-09-16T16:14:05.795Z] [smoke-test]   [OK   ] balena: service balena-supervisor-node Running
+[Logs]    [2026-09-16T16:14:05.795Z] [smoke-test]   [OK   ] balena: service smoke-test         Running
+[Logs]    [2026-09-16T16:14:05.795Z] [smoke-test] [ PASS ] diagnostics include 'balena: supervisor'
+[Logs]    [2026-09-16T16:14:05.795Z] [smoke-test] [ PASS ] diagnostics include 'balena: update'
+[Logs]    [2026-09-16T16:14:05.795Z] [smoke-test] [ PASS ] diagnostics include 'balena: update lock'
+[Logs]    [2026-09-16T16:14:05.795Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:05.795Z] [smoke-test] --- service advertisement and safety gates ----------------------------
+[Logs]    [2026-09-16T16:14:10.990Z] [smoke-test] [ PASS ] service advertised: start_service
+[Logs]    [2026-09-16T16:14:10.990Z] [smoke-test] [ PASS ] service advertised: stop_service
+[Logs]    [2026-09-16T16:14:10.990Z] [smoke-test] [ PASS ] service advertised: restart_service
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] service advertised: restart_app
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] service advertised: check_update
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] service advertised: blink
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] service advertised: get_tags
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] service advertised: set_tags
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] service advertised: get_host_config
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] service advertised: set_host_config
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] service advertised: take_update_lock
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] service advertised: release_update_lock
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] destructive service NOT advertised: reboot
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] destructive service NOT advertised: shutdown
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] [ PASS ] destructive service NOT advertised: purge_data
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:10.991Z] [smoke-test] --- supervisor payloads (open verification items) ---------------------
+[Logs]    [2026-09-16T16:14:11.188Z] [smoke-test] [ PASS ] get_tags call succeeded  -- Read 1 tag(s)
+[Logs]    [2026-09-16T16:14:11.188Z] [smoke-test]     parsed tags: [('sams_tag', 'abc123')]
+[Logs]    [2026-09-16T16:14:11.188Z] [smoke-test] [ PASS ] expected tag 'sams_tag' was parsed
+[Logs]    [2026-09-16T16:14:11.188Z] [smoke-test] [ PASS ] tag 'sams_tag' has expected value  -- got 'abc123', wanted 'abc123'
+[Logs]    [2026-09-16T16:14:11.194Z] [smoke-test] [ PASS ] get_host_config  -- Read host configuration
+[Logs]    [2026-09-16T16:14:11.194Z] [smoke-test]     hostname   : 'ca9e9e1'
+[Logs]    [2026-09-16T16:14:11.194Z] [smoke-test]     proxy_json : ''
+[Logs]    [2026-09-16T16:14:11.194Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:11.194Z] [smoke-test] --- update lock (the critical path) -----------------------------------
+[Logs]    [2026-09-16T16:14:11.197Z] [balena-supervisor-node] [0m[INFO] [1789575251.196579155] [balena_supervisor]: Update lock taken; application and host OS updates blocked.[0m
+[Logs]    [2026-09-16T16:14:11.198Z] [smoke-test] [ PASS ] take_update_lock  -- ACQUIRED -- Update lock taken; application and host OS updates blocked.
+[Logs]    [2026-09-16T16:14:11.198Z] [smoke-test] [ PASS ] lock_held became true on the state topic
+[Logs]    [2026-09-16T16:14:11.203Z] [balena-supervisor-node] [0m[INFO] [1789575251.202245859] [balena_supervisor]: Update lock already held by this node.[0m
+[Logs]    [2026-09-16T16:14:11.204Z] [smoke-test] [ PASS ] second take reports ALREADY_HELD_BY_US  -- got ALREADY_HELD_BY_US
+[Logs]    [2026-09-16T16:14:11.207Z] [balena-supervisor-node] [0m[INFO] [1789575251.206662692] [balena_supervisor]: Update lock released.[0m
+[Logs]    [2026-09-16T16:14:11.208Z] [smoke-test] [ PASS ] release_update_lock  -- Update lock released.
+[Logs]    [2026-09-16T16:14:11.208Z] [smoke-test] [ PASS ] lock_held returned to false
+[Logs]    [2026-09-16T16:14:11.208Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:11.208Z] [smoke-test]   NOTE: this proves the lock is taken and released, NOT that
+[Logs]    [2026-09-16T16:14:11.208Z] [smoke-test]   the host OS honours it. Confirming that an flock held
+[Logs]    [2026-09-16T16:14:11.209Z] [smoke-test]   inside a container blocks a host OS update still needs a
+[Logs]    [2026-09-16T16:14:11.209Z] [smoke-test]   real hostOS update attempt -- open item 1 in CLAUDE.md.
+[Logs]    [2026-09-16T16:14:11.209Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:11.209Z] [smoke-test] --- blink (physical confirmation) -------------------------------------
+[Logs]    [2026-09-16T16:14:11.214Z] [smoke-test] [ PASS ] blink  -- OK
+[Logs]    [2026-09-16T16:14:11.214Z] [smoke-test]   -> the device LED should blink for ~15s now
+[Logs]    [2026-09-16T16:14:11.214Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:11.214Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:14:11.214Z] [smoke-test] SUMMARY: 37 passed, 0 failed, 37 checks total
+[Logs]    [2026-09-16T16:14:11.214Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:14:11.214Z] [smoke-test] END OF SMOKE TEST -- paste everything from the first "=" line.
+[Logs]    [2026-09-16T16:14:11.223Z] [smoke-test] 
+[Logs]    [2026-09-16T16:14:11.223Z] [smoke-test] (test finished -- idling so the logs stay readable; `balena device ssh <ip> smoke-test` to poke around)
+==> staging block source from /Users/samd/Projects/ros-balena-supervisor (ROS 2 lyrical)
+==> staged:
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/config
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/config/fastdds-udp-only.xml
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/Dockerfile
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/smoke_test_node.py
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/Dockerfile.smoketest
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/entrypoint.sh
+    /Users/samd/Projects/ros-balena-supervisor/smoke_test/.build/src
+
+==> pushing to 192.168.8.160 (local mode must be enabled on the device)
+    both containers build ROS 2 lyrical
+    Ctrl-C detaches from the log stream; the containers keep running.
+
+[Info]    Starting build on device 192.168.8.160
+[Build]   [smoke-test] Step 1/12 : ARG ROS_DISTRO=lyrical
+[Build]   [smoke-test] Step 2/12 : FROM ros:${ROS_DISTRO}-ros-base
+[Build]   [balena-supervisor-node] Step 1/15 : ARG ROS_DISTRO=lyrical
+[Build]   [balena-supervisor-node] Step 2/15 : FROM ros:${ROS_DISTRO}-ros-base
+[Build]   [smoke-test]  ---> 9b6bf0700766
+[Build]   [smoke-test] Step 3/12 : SHELL ["/bin/bash", "-lc"]
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 6c1100a0e786
+[Build]   [smoke-test] Step 4/12 : RUN apt-get update  && apt-get install -y --no-install-recommends       ros-${ROS_DISTRO}-diagnostic-msgs       ros-${ROS_DISTRO}-rmw-fastrtps-cpp       ros-${ROS_DISTRO}-rmw-cyclonedds-cpp       ros-${ROS_DISTRO}-rmw-zenoh-cpp  && rm -rf /var/lib/apt/lists/*
+[Build]   [balena-supervisor-node]  ---> 9b6bf0700766
+[Build]   [balena-supervisor-node] Step 3/15 : SHELL ["/bin/bash", "-lc"]
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> c30f3a8ecf01
+[Build]   [smoke-test] Step 5/12 : WORKDIR /ros2_ws
+[Build]   [balena-supervisor-node]  ---> Using cache
+[Build]   [balena-supervisor-node]  ---> 6c1100a0e786
+[Build]   [balena-supervisor-node] Step 4/15 : RUN apt-get update  && apt-get install -y --no-install-recommends       ros-${ROS_DISTRO}-diagnostic-msgs       ros-${ROS_DISTRO}-rmw-fastrtps-cpp       ros-${ROS_DISTRO}-rmw-cyclonedds-cpp       ros-${ROS_DISTRO}-rmw-zenoh-cpp  && rm -rf /var/lib/apt/lists/*
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 88f36f685501
+[Build]   [smoke-test] Step 6/12 : COPY src/balena_supervisor_msgs src/balena_supervisor_msgs
+[Build]   [balena-supervisor-node]  ---> Using cache
+[Build]   [balena-supervisor-node]  ---> c30f3a8ecf01
+[Build]   [balena-supervisor-node] Step 5/15 : WORKDIR /ros2_ws
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 85b14968d1c5
+[Build]   [smoke-test] Step 7/12 : RUN source /opt/ros/${ROS_DISTRO}/setup.bash  && colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release  && rm -rf build log
+[Build]   [balena-supervisor-node]  ---> Using cache
+[Build]   [balena-supervisor-node]  ---> 88f36f685501
+[Build]   [balena-supervisor-node] Step 6/15 : COPY src/ src/
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 29cbb975e522
+[Build]   [smoke-test] Step 8/12 : COPY smoke_test_node.py /smoke_test_node.py
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 2bf1f4f695b0
+[Build]   [smoke-test] Step 9/12 : ENV PYTHONUNBUFFERED=1
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> ae9838e21e1e
+[Build]   [smoke-test] Step 10/12 : CMD ["bash", "-lc", "source /ros2_ws/install/setup.bash && exec python3 /smoke_test_node.py"]
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> f5248a4b6d3b
+[Build]   [smoke-test] Step 11/12 : LABEL io.resin.local.image=1
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 8e7026738689
+[Build]   [smoke-test] Step 12/12 : LABEL io.resin.local.service=smoke-test
+[Build]   [smoke-test]  ---> Using cache
+[Build]   [smoke-test]  ---> 9e34775975f2
+[Build]   [smoke-test] Successfully built 9e34775975f2
+[Build]   [smoke-test] Successfully tagged local_image_smoke-test:latest
+[Build]   [balena-supervisor-node]  ---> 76ed318c5dbf
+[Build]   [balena-supervisor-node] Step 7/15 : RUN source /opt/ros/${ROS_DISTRO}/setup.bash  && colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release  && rm -rf build log
+[Build]   [balena-supervisor-node]  ---> Running in 9308d07cdcd2
+[Build]   [balena-supervisor-node] Starting >>> balena_supervisor_msgs
+[Build]   [balena-supervisor-node] [91m--- stderr: balena_supervisor_msgs
+[Build]   CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+[Build]     Compatibility with CMake < 3.10 will be removed from a future version of
+[Build]     CMake.
+[Build]     Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+[Build]     to tell CMake that the project requires at least <min> but has been updated
+[Build]     to work with policies introduced by <max> or earlier.
+[Build]   ---[0m
+[Build]   [balena-supervisor-node] Finished <<< balena_supervisor_msgs [55.7s]
+[Build]   [balena-supervisor-node] [91m
+[Build]   [0m
+[Build]   [balena-supervisor-node] Starting >>> balena_supervisor_node
+[Build]   [balena-supervisor-node] Finished <<< balena_supervisor_node [1.28s]
+[Build]   [balena-supervisor-node] 
+[Build]   Summary: 2 packages finished [57.1s]
+[Build]     1 package had stderr output: balena_supervisor_msgs
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 9308d07cdcd2
+[Build]   [balena-supervisor-node]  ---> 5f56f7b25508
+[Build]   [balena-supervisor-node] Step 8/15 : COPY config/ /etc/ros-balena-supervisor/
+[Build]   [balena-supervisor-node]  ---> b2dba2ba8030
+[Build]   [balena-supervisor-node] Step 9/15 : COPY entrypoint.sh /entrypoint.sh
+[Build]   [balena-supervisor-node]  ---> 1a64f67c4d47
+[Build]   [balena-supervisor-node] Step 10/15 : RUN chmod +x /entrypoint.sh
+[Build]   [balena-supervisor-node]  ---> Running in bc72ff0b8b25
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container bc72ff0b8b25
+[Build]   [balena-supervisor-node]  ---> d40272ea6181
+[Build]   [balena-supervisor-node] Step 11/15 : ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+[Build]   [balena-supervisor-node]  ---> Running in 7d942dfaac24
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 7d942dfaac24
+[Build]   [balena-supervisor-node]  ---> fe6f7c00674c
+[Build]   [balena-supervisor-node] Step 12/15 : ENTRYPOINT ["/entrypoint.sh"]
+[Build]   [balena-supervisor-node]  ---> Running in 2fd6c1d1c0a5
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 2fd6c1d1c0a5
+[Build]   [balena-supervisor-node]  ---> 2b8088410a5f
+[Build]   [balena-supervisor-node] Step 13/15 : CMD ["balena_supervisor_node"]
+[Build]   [balena-supervisor-node]  ---> Running in 8ef7b9485c11
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container 8ef7b9485c11
+[Build]   [balena-supervisor-node]  ---> 3c782c198fb6
+[Build]   [balena-supervisor-node] Step 14/15 : LABEL io.resin.local.image=1
+[Build]   [balena-supervisor-node]  ---> Running in ec49552ff976
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container ec49552ff976
+[Build]   [balena-supervisor-node]  ---> d435a55b6599
+[Build]   [balena-supervisor-node] Step 15/15 : LABEL io.resin.local.service=balena-supervisor-node
+[Build]   [balena-supervisor-node]  ---> Running in b618072d5cf1
+[Build]   [balena-supervisor-node]  ---> Removed intermediate container b618072d5cf1
+[Build]   [balena-supervisor-node]  ---> 658fa216937a
+[Build]   [balena-supervisor-node] Successfully built 658fa216937a
+[Build]   [balena-supervisor-node] Successfully tagged local_image_balena-supervisor-node:latest
+
+[Info]    Streaming device logs...
+[Logs]    [2026-09-16T16:15:25.385Z] Streaming logs
+[Logs]    [2026-09-16T16:15:25.497Z] Taking update locks
+[Logs]    [2026-09-16T16:15:25.822Z] Killing service 'balena-supervisor-node sha256:737ac881911d5c45e5f6e114ad0d2e7c5ec97a30a2d7cbd9fd6c47c71127f9df'
+[Logs]    [2026-09-16T16:15:25.822Z] Killing service 'smoke-test sha256:ecca5760e6346442eed8a9f26d701e64fec6632f71e7b7fd8557440d276689f3'
+[Logs]    [2026-09-16T16:15:26.291Z] Service exited 'balena-supervisor-node sha256:737ac881911d5c45e5f6e114ad0d2e7c5ec97a30a2d7cbd9fd6c47c71127f9df'
+[Logs]    [2026-09-16T16:15:26.298Z] Killed service 'balena-supervisor-node sha256:737ac881911d5c45e5f6e114ad0d2e7c5ec97a30a2d7cbd9fd6c47c71127f9df'
+[Logs]    [2026-09-16T16:15:27.223Z] Installing service 'balena-supervisor-node sha256:658fa216937a3413ac89a16262131f5e6fbce04a1b1c28385a35ea108a1a4bc5'
+[Logs]    [2026-09-16T16:15:27.410Z] Installed service 'balena-supervisor-node sha256:658fa216937a3413ac89a16262131f5e6fbce04a1b1c28385a35ea108a1a4bc5'
+[Logs]    [2026-09-16T16:15:27.411Z] Starting service 'balena-supervisor-node sha256:658fa216937a3413ac89a16262131f5e6fbce04a1b1c28385a35ea108a1a4bc5'
+[Logs]    [2026-09-16T16:15:27.713Z] Started service 'balena-supervisor-node sha256:658fa216937a3413ac89a16262131f5e6fbce04a1b1c28385a35ea108a1a4bc5'
+[Logs]    [2026-09-16T16:15:28.283Z] [balena-supervisor-node] INFO: Fast DDS restricted to UDP (shared memory disabled) so this
+[Logs]    [2026-09-16T16:15:28.283Z] [balena-supervisor-node]       block reaches other containers without ipc: host, via
+[Logs]    [2026-09-16T16:15:28.283Z] [balena-supervisor-node]       FASTDDS_DEFAULT_PROFILES_FILE. Set SUPERVISOR_NODE_FASTDDS_SHM=true to use
+[Logs]    [2026-09-16T16:15:28.284Z] [balena-supervisor-node]       shared memory instead, which then requires a shared IPC
+[Logs]    [2026-09-16T16:15:28.284Z] [balena-supervisor-node]       namespace.
+[Logs]    [2026-09-16T16:15:28.284Z] [balena-supervisor-node] INFO: using rmw_fastrtps_cpp on ROS_DOMAIN_ID=0
+[Logs]    [2026-09-16T16:15:29.104Z] [balena-supervisor-node] [0m[INFO] [1789575329.103931220] [balena_supervisor]: balena supervisor node ready (supervisor at http://127.0.0.1:48484, polling every 5.0s)[0m
+[Logs]    [2026-09-16T16:15:36.470Z] Service exited 'smoke-test sha256:ecca5760e6346442eed8a9f26d701e64fec6632f71e7b7fd8557440d276689f3'
+[Logs]    [2026-09-16T16:15:36.476Z] Killed service 'smoke-test sha256:ecca5760e6346442eed8a9f26d701e64fec6632f71e7b7fd8557440d276689f3'
+[Logs]    [2026-09-16T16:15:37.649Z] Installing service 'smoke-test sha256:9e34775975f28abacfe709d8c596197759a4509bfadfbc8665a10a074bae6da7'
+[Logs]    [2026-09-16T16:15:37.794Z] Installed service 'smoke-test sha256:9e34775975f28abacfe709d8c596197759a4509bfadfbc8665a10a074bae6da7'
+[Logs]    [2026-09-16T16:15:37.795Z] Starting service 'smoke-test sha256:9e34775975f28abacfe709d8c596197759a4509bfadfbc8665a10a074bae6da7'
+[Logs]    [2026-09-16T16:15:38.083Z] Started service 'smoke-test sha256:9e34775975f28abacfe709d8c596197759a4509bfadfbc8665a10a074bae6da7'
+[Logs]    [2026-09-16T16:15:39.202Z] Releasing update locks
+[Logs]    [2026-09-16T16:15:39.383Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:15:39.383Z] [smoke-test] BALENA SUPERVISOR BLOCK -- SMOKE TEST
+[Logs]    [2026-09-16T16:15:39.384Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:15:39.384Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:39.384Z] [smoke-test] --- environment -------------------------------------------------------
+[Logs]    [2026-09-16T16:15:39.384Z] [smoke-test]   ROS_DISTRO           lyrical
+[Logs]    [2026-09-16T16:15:39.384Z] [smoke-test]   RMW_IMPLEMENTATION   rmw_fastrtps_cpp
+[Logs]    [2026-09-16T16:15:39.384Z] [smoke-test]   ROS_DOMAIN_ID        0
+[Logs]    [2026-09-16T16:15:39.384Z] [smoke-test]   rmw (effective)      rmw_fastrtps_cpp
+[Logs]    [2026-09-16T16:15:39.384Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:39.384Z] [smoke-test] --- topic discovery ---------------------------------------------------
+[Logs]    [2026-09-16T16:15:39.391Z] [smoke-test] [ PASS ] received DeviceState on /balena_supervisor/device_state
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]   DeviceState:
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     uuid                 'ca9e9e1017a4521b70318ca8413a8790'
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     device_name          'mean-brook'
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     device_type          'raspberrypi5'
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     arch                 'aarch64'
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     os_version           'balenaOS 2026.7.0'
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     supervisor_version   '17.8.2'
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     status               'Idle'
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     commit               ''
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     ip_addresses         ['192.168.8.160']
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     mac_addresses        ['88:A2:9E:F1:97:30', '2A:6A:AA:EC:75:35']
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     download_progress    -1
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     update flags         pending=True downloaded=False failed=False
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     vpn                  enabled=True connected=True
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     lock_held            False
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test] [ PASS ] device uuid populated
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test] [ PASS ] supervisor version populated
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test] [ PASS ] arch populated (expect aarch64 on a Pi 5)  -- got 'aarch64'
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test] [ PASS ] download_progress is -1 or 0-100  -- got -1
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test] [ PASS ] received AppState on /balena_supervisor/app_state
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]   AppState: app_id=1 state='applying' release='10ca12e1ea5e' overall_progress=-1
+[Logs]    [2026-09-16T16:15:39.392Z] [smoke-test]     service 'balena-supervisor-node' status='Running'    image='Downloaded'   progress=-1
+[Logs]    [2026-09-16T16:15:39.393Z] [smoke-test]     service 'smoke-test'             status='Running'    image='Downloaded'   progress=-1
+[Logs]    [2026-09-16T16:15:39.393Z] [smoke-test] [ PASS ] AppState lists services  -- found ['balena-supervisor-node', 'smoke-test']
+[Logs]    [2026-09-16T16:15:39.393Z] [smoke-test] [ PASS ] AppState includes this test container  -- services seen: ['balena-supervisor-node', 'smoke-test']
+[Logs]    [2026-09-16T16:15:39.393Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:39.393Z] [smoke-test] --- diagnostics -------------------------------------------------------
+[Logs]    [2026-09-16T16:15:44.200Z] [smoke-test] [ PASS ] received DiagnosticArray on /diagnostics
+[Logs]    [2026-09-16T16:15:44.201Z] [smoke-test]   [OK   ] balena: supervisor                 Reachable
+[Logs]    [2026-09-16T16:15:44.201Z] [smoke-test]   [OK   ] balena: update                     Up to date
+[Logs]    [2026-09-16T16:15:44.201Z] [smoke-test]   [OK   ] balena: update lock                Not held
+[Logs]    [2026-09-16T16:15:44.201Z] [smoke-test]   [OK   ] balena: service balena-supervisor-node Running
+[Logs]    [2026-09-16T16:15:44.201Z] [smoke-test]   [OK   ] balena: service smoke-test         Running
+[Logs]    [2026-09-16T16:15:44.201Z] [smoke-test] [ PASS ] diagnostics include 'balena: supervisor'
+[Logs]    [2026-09-16T16:15:44.201Z] [smoke-test] [ PASS ] diagnostics include 'balena: update'
+[Logs]    [2026-09-16T16:15:44.201Z] [smoke-test] [ PASS ] diagnostics include 'balena: update lock'
+[Logs]    [2026-09-16T16:15:44.201Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:44.201Z] [smoke-test] --- service advertisement and safety gates ----------------------------
+[Logs]    [2026-09-16T16:15:49.399Z] [smoke-test] [ PASS ] service advertised: start_service
+[Logs]    [2026-09-16T16:15:49.399Z] [smoke-test] [ PASS ] service advertised: stop_service
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] service advertised: restart_service
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] service advertised: restart_app
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] service advertised: check_update
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] service advertised: blink
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] service advertised: get_tags
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] service advertised: set_tags
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] service advertised: get_host_config
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] service advertised: set_host_config
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] service advertised: take_update_lock
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] service advertised: release_update_lock
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] destructive service NOT advertised: reboot
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] destructive service NOT advertised: shutdown
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] [ PASS ] destructive service NOT advertised: purge_data
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:49.400Z] [smoke-test] --- supervisor payloads (open verification items) ---------------------
+[Logs]    [2026-09-16T16:15:49.604Z] [smoke-test] [ PASS ] get_tags call succeeded  -- Read 1 tag(s)
+[Logs]    [2026-09-16T16:15:49.604Z] [smoke-test]     parsed tags: [('sams_tag', 'abc123')]
+[Logs]    [2026-09-16T16:15:49.605Z] [smoke-test] [ PASS ] expected tag 'sams_tag' was parsed
+[Logs]    [2026-09-16T16:15:49.605Z] [smoke-test] [ PASS ] tag 'sams_tag' has expected value  -- got 'abc123', wanted 'abc123'
+[Logs]    [2026-09-16T16:15:49.611Z] [smoke-test] [ PASS ] get_host_config  -- Read host configuration
+[Logs]    [2026-09-16T16:15:49.611Z] [smoke-test]     hostname   : 'ca9e9e1'
+[Logs]    [2026-09-16T16:15:49.611Z] [smoke-test]     proxy_json : ''
+[Logs]    [2026-09-16T16:15:49.611Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:49.611Z] [smoke-test] --- update lock (the critical path) -----------------------------------
+[Logs]    [2026-09-16T16:15:49.612Z] [balena-supervisor-node] [0m[INFO] [1789575349.612634263] [balena_supervisor]: Update lock taken; application and host OS updates blocked.[0m
+[Logs]    [2026-09-16T16:15:49.615Z] [smoke-test] [ PASS ] take_update_lock  -- ACQUIRED -- Update lock taken; application and host OS updates blocked.
+[Logs]    [2026-09-16T16:15:49.615Z] [smoke-test] [ PASS ] lock_held became true on the state topic
+[Logs]    [2026-09-16T16:15:49.616Z] [balena-supervisor-node] [0m[INFO] [1789575349.616204875] [balena_supervisor]: Update lock already held by this node.[0m
+[Logs]    [2026-09-16T16:15:49.617Z] [smoke-test] [ PASS ] second take reports ALREADY_HELD_BY_US  -- got ALREADY_HELD_BY_US
+[Logs]    [2026-09-16T16:15:49.619Z] [balena-supervisor-node] [0m[INFO] [1789575349.619711412] [balena_supervisor]: Update lock released.[0m
+[Logs]    [2026-09-16T16:15:49.621Z] [smoke-test] [ PASS ] release_update_lock  -- Update lock released.
+[Logs]    [2026-09-16T16:15:49.621Z] [smoke-test] [ PASS ] lock_held returned to false
+[Logs]    [2026-09-16T16:15:49.621Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:49.621Z] [smoke-test]   NOTE: this proves the lock is taken and released, NOT that
+[Logs]    [2026-09-16T16:15:49.621Z] [smoke-test]   the host OS honours it. Confirming that an flock held
+[Logs]    [2026-09-16T16:15:49.621Z] [smoke-test]   inside a container blocks a host OS update still needs a
+[Logs]    [2026-09-16T16:15:49.621Z] [smoke-test]   real hostOS update attempt -- open item 1 in CLAUDE.md.
+[Logs]    [2026-09-16T16:15:49.621Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:49.621Z] [smoke-test] --- blink (physical confirmation) -------------------------------------
+[Logs]    [2026-09-16T16:15:49.626Z] [smoke-test] [ PASS ] blink  -- OK
+[Logs]    [2026-09-16T16:15:49.626Z] [smoke-test]   -> the device LED should blink for ~15s now
+[Logs]    [2026-09-16T16:15:49.626Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:49.626Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:15:49.626Z] [smoke-test] SUMMARY: 37 passed, 0 failed, 37 checks total
+[Logs]    [2026-09-16T16:15:49.626Z] [smoke-test] ========================================================================
+[Logs]    [2026-09-16T16:15:49.626Z] [smoke-test] END OF SMOKE TEST -- paste everything from the first "=" line.
+[Logs]    [2026-09-16T16:15:49.632Z] [smoke-test] 
+[Logs]    [2026-09-16T16:15:49.632Z] [smoke-test] (test finished -- idling so the logs stay readable; `balena device ssh <ip> smoke-test` to poke around)

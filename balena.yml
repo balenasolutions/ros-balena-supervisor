@@ -1,0 +1,38 @@
+# This file is shared by every published block. scripts/stage.sh rewrites `name`
+# and the distro in `description` per variant; the registry path comes from the
+# balenaCloud block slug, not from here. Keep `version` in step with the releases
+# you publish -- consumers pin with it.
+name: ros-balena-supervisor
+type: sw.block
+version: 0.1.0
+description: >-
+  Exposes the on-device balena supervisor as a ROS 2 node: device and
+  application state topics, /diagnostics integration, and services for service
+  lifecycle, device configuration, power control and update locking. Lets a
+  robot block balena updates while it is mid-mission.
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: 'https://github.com/balenasolutions/ros-balena-supervisor'
+  logo:
+    type: blob.asset
+    data:
+      url: 'https://raw.githubusercontent.com/balenasolutions/ros-balena-supervisor/main/logo.png'
+data:
+  # These two fields are balenaHub DISPLAY metadata -- what the block is
+  # advertised as compatible with. They do not restrict what can pull or run it;
+  # any 64-bit device type can, and there are ~90 aarch64 ones. The list below
+  # is a representative sample, not a limit.
+  #
+  # 64-bit only, though: the ros:<distro>-ros-base base images publish
+  # linux/amd64 and linux/arm64 exclusively, for every distro, so armv7hf and
+  # rpi device types genuinely cannot run this block -- do not add them here.
+  defaultDeviceType: generic-aarch64
+  supportedDeviceTypes:
+    - raspberrypi4-64
+    - raspberrypi5
+    - generic-aarch64
+    - jetson-nano
+    - genericx86-64-ext
+    - intel-nuc
