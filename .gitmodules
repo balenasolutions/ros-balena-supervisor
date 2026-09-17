@@ -1,0 +1,3 @@
+[submodule "src/ros-balena-supervisor-msgs"]
+	path = src/ros-balena-supervisor-msgs
+	url = https://github.com/balenasolutions/ros-balena-supervisor-msgs.git

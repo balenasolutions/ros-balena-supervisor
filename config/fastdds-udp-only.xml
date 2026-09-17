@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Restricts Fast DDS to UDPv4, disabling the shared memory transport.
+
+  Fast DDS carries data between participants on the same host over shared
+  memory, which does not cross container boundaries: each container has its own
+  /dev/shm, so participants discover each other over UDP multicast and then
+  silently exchange nothing.
+
+  The usual workaround is `ipc: host`, which hands the container the entire host
+  IPC namespace (SysV IPC, POSIX message queues and /dev/shm), shared with every
+  other container using it. That is a poor trade for a block dropped into
+  someone else's fleet, so this participant simply does not use shared memory.
+
+  This affects ONLY traffic to and from this node. Other participants keep using
+  shared memory among themselves; they reach this one over the UDP locators it
+  announces. The cost is a memory copy on messages this block publishes, which
+  are small and infrequent.
+-->
+<dds>
+    <profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+        <transport_descriptors>
+            <transport_descriptor>
+                <transport_id>udpv4_only</transport_id>
+                <type>UDPv4</type>
+            </transport_descriptor>
+        </transport_descriptors>
+
+        <!-- is_default_profile applies this to participants created without an
+             explicit profile name, which is how rclpy creates them. -->
+        <participant profile_name="udpv4_only_participant" is_default_profile="true">
+            <rtps>
+                <userTransports>
+                    <transport_id>udpv4_only</transport_id>
+                </userTransports>
+                <useBuiltinTransports>false</useBuiltinTransports>
+            </rtps>
+        </participant>
+    </profiles>
+</dds>
